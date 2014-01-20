@@ -1,1 +1,0 @@
-Bloomberg : "C:\CharlesRiver\91455\serverapps\bin\DoOutput.bat"
