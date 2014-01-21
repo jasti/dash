@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>jQuery UI Draggable - Default functionality</title>
+<link rel="stylesheet"
+	href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+<style>
+#draggable {
+	width: 150px;
+	height: 150px;
+	padding: 0.5em;
+}
+</style>
+<script>
+
+$(document).ready(function() {
+	
+	
+	$(function() {
+		$("#draggable").draggable();
+	});
+
+
+    $.get(
+      "http://localhost:8080/Dash/rest/security",
+       function(data) {
+    	   alert(data);
+    	   var html = '';
+    	   for(var i = 0; i < data.d.length; i++)
+    	               html += '<tr><td>' + data.d[i].secId + '</td><td>' + data.d[i].secName + '</td></tr>';
+    	   $('#securityTable tr').first().after(html);
+    	   
+    	   
+         
+       }
+    );
+ 
+}
+
+
+
+</script>
+</head>
+<body>
+
+	<div id="draggable" class="ui-widget-content">
+
+		<table id="securityTable">
+			<tr>
+				<th>Sec Id</th>
+				<th>Sec Name</th>
+				<th>Ticker</th>
+			</tr>
+
+		</table>
+	</div>
+
+
+</body>
+</html>

@@ -13,9 +13,6 @@
 <meta name="viewport" content="width=device-width">
 
 
-<img src="/images/loading.gif" id="loading-indicator"
-	style="display: none" />
-
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <style>
 body {
@@ -87,14 +84,16 @@ alert("Welcome " + name + ", the " + job);
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
 
+		<div id="draggable" class="ui-widget-content">
+			<p>
+				<a href="http://localhost:8080/Dash/rest/security">Securities</a>
+			</p>
+			<p>
+				<a href="http://localhost:8080/Dash/rest/security/1/trades">Trades
+					for a security</a>
+			</p>
+		</div>
 
-		<p>
-			<a href="http://localhost:8080/Dash/rest/security">Securities</a>
-		</p>
-		<p>
-			<a href="http://localhost:8080/Dash/rest/security/1/trades">Trades
-				for a security</a>
-		</p>
 
 		<hr>
 

@@ -23,6 +23,7 @@ public class SecurityResource {
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	public List<Security> findAll() {
+		System.out.println("Incoming request processed");
 		return securityDao.findAll();
 	}
 
