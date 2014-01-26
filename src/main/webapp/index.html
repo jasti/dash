@@ -49,12 +49,16 @@ button {
 	var aaData = [];
 
 	$.ajax({
-		url : 'http://localhost:8080/Dash/rest/security',
+		url : 'rest/security', 
+	<!-- url : 'http://http://ec2-54-201-241-107.us-west-2.compute.amazonaws.com:8080/Dash/rest/security',-->
+	  <!--  dataType: 'jsonp', -->
 		success : function(data) {
 			var secArr = data.security;
 			for (var i = 0; i < secArr.length; i++) {
 
-				aaData.push([ secArr[i].secId, secArr[i].secName
+				console.log(Object.prototype.toString.call(secArr[i].secId));
+				aaData.push([ secArr[i].secId, secArr[i].secName,
+						secArr[i].ticker
 
 				]);
 			}
@@ -99,14 +103,14 @@ button {
 			<div class="panel-body">
 
 				<p>
-					<a href="http://localhost:8080/Dash/rest/security">Securities</a>
+					<h1> Securities </h1>
 				<table id="secTableData">
 					<thead>
 						<tr>
 
-							<th>secId</th>
-							<th>secName</th>
-
+							<th>Sec Id</th>
+							<th>Sec Name</th>
+							<th>Ticker</th>
 						</tr>
 					</thead>
 					<tbody>

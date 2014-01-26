@@ -71,6 +71,7 @@ public class SecurityDAO {
 		Security security = new Security();
 		security.setSecId(rs.getInt("SEC_ID"));
 		security.setSecName(rs.getString("SEC_NAME"));
+		security.setTicker(rs.getString("TICKER"));
 
 		return security;
 	}
