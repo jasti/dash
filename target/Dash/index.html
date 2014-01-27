@@ -13,10 +13,9 @@
 <meta name="viewport" content="width=device-width">
 
 
-<img src="/images/loading.gif" id="loading-indicator"
-	style="display: none" />
-
-<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" type="text/css"
+	href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
 <style>
 body {
 	padding-top: 50px;
@@ -29,45 +28,55 @@ button {
 }
 }
 </style>
-<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="css/bootstrap-theme.css">
 <link rel="stylesheet" href="css/main.css">
 
 <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 <script type="text/javascript" src="js/vendor/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" charset="utf8"
+	src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" charset="utf8"
+	src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+
 
 
 <!-- Load templates from template folder -->
 
-<script>                       
-
-$(".btn btn-large").click(function () { 
-
-
-    	
-        $(document).ready(function() {
-      
-          $.post(
-            "http://localhost:8083",
-             { key: "//Users//zudec//Code//fetch_test//doFeeds.sh" },
-             function(data) {
-                $(.bloombergContent).html(data);  
-             }
-          );
-       
-      }
-}
-    </script>
-
-<script>
-function myFunction(name,job)
-{
-alert("Welcome " + name + ", the " + job);
-}
-</script>
 
 
 
 <script>
+	var aaData = [];
+
+	$.ajax({
+		url : 'rest/security', 
+	<!-- url : 'http://http://ec2-54-201-241-107.us-west-2.compute.amazonaws.com:8080/Dash/rest/security',-->
+	  <!--  dataType: 'jsonp', -->
+		success : function(data) {
+			var secArr = data.security;
+			for (var i = 0; i < secArr.length; i++) {
+
+				console.log(Object.prototype.toString.call(secArr[i].secId));
+				aaData.push([ secArr[i].secId, secArr[i].secName,
+						secArr[i].ticker
+
+				]);
+			}
+
+			loadData(aaData);
+		}
+
+	});
+
+	function loadData(data) {
+
+		$('#secTableData').dataTable({
+			"aaData" : data
+
+		});
+
+	};
+
 	$(function() {
 		$("#navContent").load("navs.html");
 	});
@@ -86,22 +95,40 @@ alert("Welcome " + name + ", the " + job);
 		<!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
+		<br>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Securities</h3>
+			</div>
+			<div class="panel-body">
+
+				<p>
+					<h1> Securities </h1>
+				<table id="secTableData">
+					<thead>
+						<tr>
+
+							<th>Sec Id</th>
+							<th>Sec Name</th>
+							<th>Ticker</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+
+				</p>
 
 
-		<p>
-			<a href="http://localhost:8080/Dash/rest/security">Securities</a>
-		</p>
-		<p>
-			<a href="http://localhost:8080/Dash/rest/security/1/trades">Trades
-				for a security</a>
-		</p>
 
-		<hr>
 
-		<hr>
+			</div>
+		</div>
+
+		<br>
+
 		<div id="footerContent"></div>
 	</div>
-	<hr>
-	<hr>
+
 </body>
 </html>
